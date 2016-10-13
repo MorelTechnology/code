@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<webParts>
+  <webPart xmlns="http://schemas.microsoft.com/WebPart/v3">
+    <metaData>
+      <type name="UserProfileServiceWebpart.UserInformation.UserInformation, $SharePoint.Project.AssemblyFullName$" />
+      <importErrorMessage>$Resources:core,ImportErrorMessage;</importErrorMessage>
+    </metaData>
+    <data>
+      <properties>
+        <property name="Title" type="string">User Information (Demo)</property>
+        <property name="Description" type="string">Demonstrates extracting information from the User Profile Service for display or use in other functions.</property>
+      </properties>
+    </data>
+  </webPart>
+</webParts>
