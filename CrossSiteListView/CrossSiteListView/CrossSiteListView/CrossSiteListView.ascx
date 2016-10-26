@@ -7,9 +7,23 @@
 <%@ Register Tagprefix="WebPartPages" Namespace="Microsoft.SharePoint.WebPartPages" Assembly="Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="CrossSiteListView.ascx.cs" Inherits="CrossSiteListView.CrossSiteListView.CrossSiteListView" %>
 <SharePoint:ScriptLink ID="ScriptLink1" runat="server" Name="/_layouts/15/CrossSiteListView/js/dataRetrievalFunctions.js" Localizable="false"></SharePoint:ScriptLink>
-
-<% if (SPContext.Current.FormContext.FormMode == SPControlMode.Edit) { %><b>This Page is in edit mode.</b><br />Save the page to view the results.<br /><br /><% } %>
-
 <div id="A2O_Webpart_Status">
-    <img src='../_layouts/15/images/CrossSiteListView/loading.gif' style='width: 100px; height: 50px; padding: 25px;'/>
+
+<% if ((SPContext.Current.FormContext.FormMode == SPControlMode.Edit) || (HttpContext.Current.Request.Url.ToString().Contains("?PageView=")))
+    { // Shell to Raw HTML//%>
+        <h3>This Page is in edit mode.<br />Save the page to view the results.</h3>
+        <br />
+        <b style="color:red;">Note:</b> This webpart has a few known 'bugs'.  
+        <a href ="../_layouts/15/CrossSiteListView/defect-tracker.htm" target="_blank"><u>Read about them here.</u></a>
+        <p><em><sub>This element id: #<%=ClientID%></sub></em></p>
+<%//ASPNET// 
+    }
+    else
+    {// Shell to Raw HTML//%>
+         <img src='../_layouts/15/images/CrossSiteListView/loading.gif' style='width: 100px; height: 50px; padding: 25px;'/>
+<%//ASPNET// 
+    }
+    //ASPNET Closed//
+%>
 </div>
+

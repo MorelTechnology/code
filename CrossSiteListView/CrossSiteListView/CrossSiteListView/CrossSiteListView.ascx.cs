@@ -57,11 +57,14 @@ namespace CrossSiteListView.CrossSiteListView
                 scriptPayload.Append("LoadAnyListView('");
                 scriptPayload.Append(_sourceSiteUrl + "','" + _listName + "','" + _listViewTitle + "','" + ClientID + "',");
                 if (_linksInNewWindow) { scriptPayload.Append("1,"); } else { scriptPayload.Append("0,"); } //problem passing t/f boolean?
-                if (_NormalizeTable) { scriptPayload.Append("1"); } else { scriptPayload.Append("0"); } //problem passing t/f boolean?
+                if (_NormalizeTable) { scriptPayload.Append("1,"); } else { scriptPayload.Append("0,"); } //problem passing t/f boolean?
+                if (_collapseGroups) { scriptPayload.Append("1,"); } else { scriptPayload.Append("0,"); } //problem passing t/f boolean?
+                if (_showRefreshLink) { scriptPayload.Append("1"); } else { scriptPayload.Append("0"); } //problem passing t/f boolean?
                 scriptPayload.Append(");</script>");
                 scriptInstance.RegisterStartupScript(scriptType, scriptName, scriptPayload.ToString());
             }
 
+            
         }
         [WebBrowsable(true),
         WebDisplayName("Source Site URL"),
@@ -86,9 +89,9 @@ namespace CrossSiteListView.CrossSiteListView
 
         private Boolean _lnkNW = false;
         [WebBrowsable(true),
-         WebDisplayName("Force any links to open in new tab/window."),
+         WebDisplayName("Force all links to open in new tab/window."),
          WebDescription("This option will modify any links in the data to open " +
-            "in a new tab or window, based on browser setting."),         
+            "in a new tab or window, based on browser setting.  (This excludes 'javascript:' links.)"),         
          Personalizable(PersonalizationScope.Shared),
          Category("Advanced Rendering Settings")]
         public Boolean _linksInNewWindow
@@ -99,10 +102,11 @@ namespace CrossSiteListView.CrossSiteListView
 
         private Boolean _nrmTbl = false;
         [WebBrowsable(true),
-         WebDisplayName("Normalize Table"),
+         WebDisplayName("Display only data"),
          WebDescription("This option will modify the view display to show " +
-            "only the data, suppressing column headers, item selection checkboxes and " + 
-            "remove the extra whitespace padding between entries."),
+            "only the view data, suppressing webpart title (regardless of chrome setting), " +
+            "column headers, item selection checkboxes and " + 
+            "any extra whitespace padding between entries."),
          Personalizable(PersonalizationScope.Shared),
          Category("Advanced Rendering Settings")]
         public Boolean _NormalizeTable
@@ -110,6 +114,32 @@ namespace CrossSiteListView.CrossSiteListView
             get { return _nrmTbl; }
             set { _nrmTbl = value; }
         }
+
+        private Boolean _colGrp = false;
+        [WebBrowsable(true),
+         WebDisplayName("Collapse Expanded Groups"),
+         WebDescription("To use grouped entries with this webpart, your view must start with the groups expanded." + 
+            "This option collapses them all upon page load."),
+         Personalizable(PersonalizationScope.Shared),
+         Category("Advanced Rendering Settings")]
+        public Boolean _collapseGroups
+        {
+            get { return _colGrp; }
+            set { _colGrp = value; }
+        }
+
+        private Boolean _shwRef = false;
+        [WebBrowsable(true),
+         WebDisplayName("Show Asynchronous Refresh Link"),
+         WebDescription("Show a link in the webpart which asynchronously refreshes the view, without refreshing the rest of the page."),
+         Personalizable(PersonalizationScope.Shared),
+         Category("Advanced Rendering Settings")]
+        public Boolean _showRefreshLink
+        {
+            get { return _shwRef; }
+            set { _shwRef = value; }
+        }
+
 
         private Boolean _incJQ = false;
         [WebBrowsable(true),

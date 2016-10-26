@@ -78,14 +78,29 @@ namespace CrossSiteListView.CrossSiteListView {
             "artCodeGenerator", "14.0.0.0")]
         private void @__Render__control1(System.Web.UI.HtmlTextWriter @__w, System.Web.UI.Control parameterContainer) {
             parameterContainer.Controls[0].RenderControl(@__w);
-            @__w.Write("\r\n\r\n");
-   if (SPContext.Current.FormContext.FormMode == SPControlMode.Edit) { 
-            @__w.Write("<b>This Page is in edit mode.</b><br />Save the page to view the results.<br /><b" +
-                    "r />");
-                                                                                                                                                                 } 
-            @__w.Write("\r\n\r\n<div id=\"A2O_Webpart_Status\">\r\n    <img src=\'../_layouts/15/images/CrossSiteL" +
-                    "istView/loading.gif\' style=\'width: 100px; height: 50px; padding: 25px;\'/>\r\n</div" +
-                    ">\r\n");
+            @__w.Write("\r\n<div id=\"A2O_Webpart_Status\">\r\n\r\n");
+   if ((SPContext.Current.FormContext.FormMode == SPControlMode.Edit) || (HttpContext.Current.Request.Url.ToString().Contains("?PageView=")))
+    { // Shell to Raw HTML//
+            @__w.Write(@"
+        <h3>This Page is in edit mode.<br />Save the page to view the results.</h3>
+        <br />
+        <b style=""color:red;"">Note:</b> This webpart has a few known 'bugs'.  
+        <a href =""../_layouts/15/CrossSiteListView/defect-tracker.htm"" target=""_blank""><u>Read about them here.</u></a>
+        <p><em><sub>This element id: #");
+                              @__w.Write(ClientID);
+
+            @__w.Write("</sub></em></p>\r\n");
+  //ASPNET// 
+    }
+    else
+    {// Shell to Raw HTML//
+            @__w.Write("\r\n         <img src=\'../_layouts/15/images/CrossSiteListView/loading.gif\' style=\'" +
+                    "width: 100px; height: 50px; padding: 25px;\'/>\r\n");
+  //ASPNET// 
+    }
+    //ASPNET Closed//
+
+            @__w.Write("\r\n</div>\r\n\r\n");
         }
         
         [GeneratedCodeAttribute("Microsoft.VisualStudio.SharePoint.ProjectExtensions.CodeGenerators.SharePointWebP" +

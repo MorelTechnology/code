@@ -100,6 +100,8 @@
     <Content Include="Images\CrossSiteListView\A2OLogo.png" />
     <Content Include="Images\CrossSiteListView\A2O_feature_Icon.png" />
     <Content Include="Images\CrossSiteListView\loading.gif" />
+    <Content Include="Images\CrossSiteListView\view_refresh.png" />
+    <Content Include="Layouts\CrossSiteListView\defect-tracker.htm" />
     <Content Include="Layouts\CrossSiteListView\js\dataRetrievalFunctions.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
